@@ -4,22 +4,41 @@ using System.Linq;
 using UnityEngine;
 using Nakama;
 
-public class LeaderboardService
+public class LeaderboardService : MonoBehaviour
 {
-    private readonly IClient client;
-    private readonly ISession session; 
+    private static LeaderboardService instance;
+    private IClient client;
+    private ISession session; 
 
-    public LeaderboardService(IClient client, ISession session)
+    private void Awake()
     {
-        this.client = client;
-        this.session = session;
+        client = NakamaConnection.Instance.Client;
+        session = NakamaConnection.Instance.Session;
+    }
+
+    public static LeaderboardService Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindFirstObjectByType<LeaderboardService>();
+
+                if (instance == null)
+                {
+                    GameObject gameObject = new GameObject("LeaderboardService");
+                    instance = gameObject.AddComponent<LeaderboardService>();
+                }
+            }
+            return instance;
+        }
     }
 
     public async Task<IApiLeaderboardRecord> WriteLeaderboardRecordAsync(string leaderboardId, long score, long subScore = 0L, string metadata = null)
     {
         if (session == null || session.IsExpired)
         {
-            Debug.LogError("La sesión es nula o ha expirado.");
+            Debug.LogError("La sesiï¿½n es nula o ha expirado.");
             return null;
         }
 
@@ -31,12 +50,9 @@ public class LeaderboardService
     {
         if (session == null || session.IsExpired)
         {
-            Debug.LogError("La sesión es nula o ha expirado.");
+            Debug.LogError("The session is null or has expired.");
             return null;
         }
-
-        Debug.Log("session: "+ session);
-        Debug.Log("leaderboardId: " + leaderboardId);
 
         IApiLeaderboardRecordList apiLeaderboardRecordList = await client.ListLeaderboardRecordsAsync(session, leaderboardId, limit: limit);
         return apiLeaderboardRecordList.Records.ToList();

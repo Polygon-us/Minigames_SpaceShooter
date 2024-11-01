@@ -5,9 +5,9 @@ using UnityEngine;
 public class NakamaSocketManager
 {
     private ISocket socket;
-    private NakamaSessionManager sessionManager;
+    private NakamaSession sessionManager;
 
-    public NakamaSocketManager(NakamaSessionManager session)
+    public NakamaSocketManager(NakamaSession session)
     {
         sessionManager = session;
         socket = NakamaClient.Client.NewSocket();

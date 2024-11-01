@@ -9,6 +9,7 @@ public class NakamaClient
     public static void Initialize(NakamaConfig config)
     {
         nakamaConfig = config;
+        client = new Client(nakamaConfig.scheme, nakamaConfig.host, nakamaConfig.port, nakamaConfig.serverKey);
     }
 
     public static IClient Client
@@ -17,7 +18,8 @@ public class NakamaClient
         {
             if (client == null)
             {
-                client = new Client(nakamaConfig.scheme, nakamaConfig.host, nakamaConfig.port, nakamaConfig.serverKey);
+                Debug.LogError("NakamaClient has not been initialized. Call Initialize first.");
+                return null;
             }
             return client;
         }

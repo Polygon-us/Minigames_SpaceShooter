@@ -1,8 +1,8 @@
 public class AuthenticationService
 {
-    private NakamaSessionManager sessionManager;
+    private NakamaSession sessionManager;
 
-    public AuthenticationService(NakamaSessionManager session)
+    public AuthenticationService(NakamaSession session)
     {
         sessionManager = session;
     }

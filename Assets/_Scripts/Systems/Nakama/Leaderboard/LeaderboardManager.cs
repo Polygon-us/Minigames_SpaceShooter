@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
 using System;
+using Nakama;
 using TMPro;
 
 public class LeaderboardManager : MonoBehaviour
@@ -22,53 +24,29 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField] private GameObject recordPrefab;
     [SerializeField] private Transform recordContainer;
 
-    private const string scorePoint = ".";
     private bool isOn = false;
     private LeaderboardService leaderboardService;
-    private NakamaSessionManager sessionManager;
 
-    private async void Awake()
+    private void Awake()
     {
         panelEnd.SetActive(true);
         panelSubmit.SetActive(false);
         panelSubmiting.SetActive(false);
         panelSubmited.SetActive(false);
-
-        while (NakamaConnection.Instance == null)
-        {
-            Debug.LogWarning("Waiting for NakamaConnection to be initialized...");
-            await Task.Delay(100);
-        }
-
-        NakamaConnection.Instance.OnNakamaInitialized += InitializeLeaderboardService;
-    }
-
-    private void OnDestroy()
-    {
-        if (NakamaConnection.Instance != null)
-        {
-            NakamaConnection.Instance.OnNakamaInitialized -= InitializeLeaderboardService;
-        }
-    }
-
-    private void InitializeLeaderboardService()
-    {
-        leaderboardService = NakamaConnection.Instance.GetLeaderboardService();
-
-        if (leaderboardService == null)
-        {
-            Debug.LogError("LeaderboardService no está inicializado.");
-        }
     }
 
     public void SetLeaderboardStatus(bool on)
     {
-        if (on && isOn) return;
-
         Leaderboard(on).Forget();
     }
 
-    private async UniTask Leaderboard(bool on)
+    public void ExitLeaderboard(bool on)
+    {
+        isOn = on;
+        UiManager.Instance.SetUi(UiType.Leaderboard, on, 0.5f);
+    }
+
+    public async UniTask Leaderboard(bool on)
     {
         isOn = on;
 
@@ -82,18 +60,19 @@ public class LeaderboardManager : MonoBehaviour
 
     private async UniTask SetLeaderboardRecords()
     {
+
         for (int i = recordContainer.childCount - 1; i >= 0; i--)
         {
             Destroy(recordContainer.GetChild(i).gameObject);
         }
-        Debug.Log("leaderboardService: " + leaderboardService);
+
         try
         {
-            var leaderboardData = await leaderboardService.GetLeaderboardAsync(leaderboardId);
-            Debug.Log("leaderboardData: " + leaderboardData);
-            for (int i = 0; i < leaderboardData.Count; i++)
+            List<IApiLeaderboardRecord> leaderboardRecords = await LeaderboardService.Instance.GetLeaderboardAsync(leaderboardId);
+
+            for (int i = 0; i < leaderboardRecords.Count; i++)
             {
-                var record = leaderboardData[i];
+                var record = leaderboardRecords[i];
                 string playerRank = record.Rank.ToString();
                 string playerScore = FormatNumber(record.Score.ToString());
                 string playerName = record.Username;
@@ -119,7 +98,7 @@ public class LeaderboardManager : MonoBehaviour
 
     public void StartUploadScore()
     {
-        if (string.IsNullOrEmpty(nameInput.text) || PlayerController.Instance.health > PlayerController.Instance._properties.health)
+        if (PlayerController.Instance.health > PlayerController.Instance._properties.health)
         {
             return;
         }
@@ -136,9 +115,9 @@ public class LeaderboardManager : MonoBehaviour
     {
         try
         {
-            var leaderboardData = await leaderboardService.WriteLeaderboardRecordAsync(leaderboardId, GameManager.Instance.score);
+            IApiLeaderboardRecord leaderboardRecord = await LeaderboardService.Instance.WriteLeaderboardRecordAsync(leaderboardId, GameManager.Instance.score);
 
-            if (leaderboardData != null)
+            if (leaderboardRecord != null)
             {
                 panelEnd.SetActive(false);
                 panelSubmit.SetActive(false);
