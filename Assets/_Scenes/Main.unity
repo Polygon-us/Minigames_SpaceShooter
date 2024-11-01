@@ -1086,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &248933442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2215,17 +2215,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FirestoreManager, Assembly-CSharp
-        m_MethodName: StartUploadScore
-        m_Mode: 1
+      - m_Target: {fileID: 1758411001}
+        m_TargetAssemblyTypeName: LeaderboardManager, Assembly-CSharp
+        m_MethodName: SetLeaderboardStatus
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &505447541
 GameObject:
@@ -2245,7 +2245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &505447542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &515344121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8095,9 +8095,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FirestoreManager, Assembly-CSharp
-        m_MethodName: SetLeaderboardStatus
+      - m_Target: {fileID: 1869139842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9445,9 +9445,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FirestoreManager, Assembly-CSharp
-        m_MethodName: SetLeaderboardStatus
+      - m_Target: {fileID: 1869139842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9456,6 +9456,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1659879119}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1001 &1504449924
 PrefabInstance:
@@ -10251,9 +10263,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FirestoreManager, Assembly-CSharp
-        m_MethodName: SetLeaderboardStatus
+      - m_Target: {fileID: 1869139842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10262,6 +10274,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1659879119}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1549655286
 GameObject:
@@ -21674,13 +21698,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leaderboardId: 4ec4f126-3f9d-11e7-84ef-b7c182b36521
-  panelEnd: {fileID: 0}
-  panelSubmit: {fileID: 0}
-  panelSubmiting: {fileID: 0}
-  panelSubmited: {fileID: 0}
-  nameInput: {fileID: 0}
-  recordPrefab: {fileID: 0}
-  recordContainer: {fileID: 0}
+  panelEnd: {fileID: 248933441}
+  panelSubmit: {fileID: 1714724297}
+  panelSubmiting: {fileID: 2046045118}
+  panelSubmited: {fileID: 718796487}
+  nameInput: {fileID: 162873338}
+  recordPrefab: {fileID: 3142391469533719991, guid: a61e216a9b1d76e4dadb8c9a054f48cc, type: 3}
+  recordContainer: {fileID: 944347016}
 --- !u!1001 &1766444713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29040,7 +29064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2046045119
 RectTransform:
   m_ObjectHideFlags: 0
