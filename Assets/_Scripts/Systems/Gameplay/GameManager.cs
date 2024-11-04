@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ControlsManager controlsManager;
     [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private LeaderboardManager leaderboardManager;
+    [SerializeField] private LeaderboardView leaderboardView;
 
     private void OnDrawGizmosSelected()
     {
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
             hasStarted = false;
             UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
 
-            leaderboardManager.StartUploadScore();
+            leaderboardView.StartUploadScore();
 
             endScore.SetText(postcore + score);
             AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
