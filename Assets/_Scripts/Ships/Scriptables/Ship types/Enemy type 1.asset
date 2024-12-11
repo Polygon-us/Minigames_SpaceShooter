@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
   m_Name: Enemy type 1
   m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
   color: {r: 0.020288562, g: 0.07618539, b: 0.69387203, a: 1}
   name: 
   description: 
@@ -34,4 +41,4 @@ MonoBehaviour:
   behaviourMathfSin: 1.5
   _timeToContinue: 0
   timeToContinue: -1
-  spawnIndex: 6
+  spawnIndex: 13
